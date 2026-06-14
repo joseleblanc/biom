@@ -296,3 +296,37 @@ p {
         opacity: 1;
     }
 }
+
+/* ==========================================
+   FOTO COM MOLDURA FLORAL
+   ========================================== */
+
+.profile-wrapper {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 20px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-img {
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: relative;
+    z-index: 2;
+    border: 4px solid #fff;
+    animation: profileGlow 3s infinite ease-in-out;
+}
+
+.profile-moldura {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+    z-index: 3;
+    pointer-events: none;
+}
