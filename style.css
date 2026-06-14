@@ -1,0 +1,298 @@
+/* ==========================================
+   CONFIGURAÇÕES GERAIS (RESET & FONTE)
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #ffe5ec;
+    
+    /* O SEU FUNDO ORIGINAL MANTIDO IDÊNTICO */
+    background-image: 
+        linear-gradient(135deg, rgba(255, 229, 236, 0.85), rgba(255, 194, 209, 0.85)),
+        url("flor.jpg");
+        
+    background-repeat: repeat;
+    background-size: auto, 120px 120px;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* ==========================================
+   CONTAINER PRINCIPAL (APENAS O RISCO NA BORDA)
+   ========================================== */
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    padding: 40px 30px;
+    text-align: center;
+    background: transparent;
+    border-radius: 24px;
+    overflow: hidden; 
+}
+
+/* O Pavio Rosa Giratório */
+.container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+        from 0deg,
+        transparent 60%,
+        #ff8fab 85%,
+        #fb6f92 100%
+    );
+    animation: rodarPavio 8s linear infinite;
+    z-index: -2;
+}
+
+/* Fundo do Quadro Branco com Opacidade */
+.container::after {
+    content: '';
+    position: absolute;
+    top: 1.5px;
+    left: 1.5px;
+    right: 1.5px;
+    bottom: 1.5px;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 22.5px; 
+    z-index: -1;
+}
+
+.container * {
+    position: relative;
+    z-index: 1;
+}
+
+/* ==========================================
+   TEXTOS & FOTO DE PERFIL
+   ========================================== */
+.profile-img {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #fff;
+    margin-bottom: 15px;
+    animation: profileGlow 3s infinite ease-in-out;
+}
+
+h1 {
+    color: #fb6f92;
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+    text-shadow: 1px 1px 2px rgba(251, 111, 146, 0.1);
+}
+
+p {
+    color: #ff8fab;
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+    font-weight: 500;
+}
+
+/* ==========================================
+   ÁREA DE LINKS (BOTÕES CONTEMPORÂNEOS)
+   ========================================== */
+.links-area {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.link-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #ffffff;
+    color: #fb6f92;
+    text-decoration: none;
+    padding: 15px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 182, 193, 0.4);
+}
+
+.link-btn:hover {
+    background: #ffb3c6;
+    color: #ffffff;
+    transform: translateY(-3px);
+    border-color: #ff8fab;
+    box-shadow: 0 0 15px #ffb3c6, 0 6px 20px rgba(251, 111, 146, 0.2);
+}
+
+/* ==========================================
+   PLAYER DE MÚSICA FLUTUANTE
+   ========================================== */
+.music-player {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #fff;
+    border: 1px solid #ffc2d1;
+    padding: 10px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    color: #fb6f92;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.music-player:hover {
+    transform: scale(1.1) rotate(5deg);
+    background: #ffe5ec;
+    color: #ff8fab;
+    border-color: #ff8fab;
+}
+
+.music-player.playing i {
+    animation: pulse 1.2s infinite alternate;
+}
+
+/* ==========================================
+   ESTILO DA PRÉ-TELA DE BOAS-VINDAS (OVERLAY)
+   ========================================== */
+.welcome-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 229, 236, 0.4);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.welcome-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.welcome-card {
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 182, 193, 0.6);
+    padding: 40px 30px;
+    border-radius: 24px;
+    text-align: center;
+    max-width: 340px;
+    width: 90%;
+    box-shadow: 0 10px 30px rgba(251, 111, 146, 0.15);
+}
+
+.welcome-icon {
+    font-size: 3rem;
+    color: #fb6f92;
+    margin-bottom: 10px;
+    animation: pulse 1.2s infinite alternate;
+}
+
+.welcome-card h2 {
+    color: #fb6f92;
+    margin-bottom: 10px;
+    font-size: 1.6rem;
+}
+
+.welcome-card p {
+    color: #ff8fab;
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+}
+
+/* NOVA SETA ROSA DELICADA (Apontando para baixo) */
+.seta-baixo {
+    display: block;
+    color: #fb6f92;
+    font-size: 1.3rem;
+    margin: 0 auto 20px auto;
+    animation: floatingArrow 1.5s infinite ease-in-out;
+}
+
+.enter-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #ffffff;
+    color: #fb6f92;
+    border: 1px solid rgba(255, 182, 193, 0.6);
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.enter-btn:hover {
+    background: #ffb3c6;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px #ffb3c6, 0 5px 15px rgba(251, 111, 146, 0.2);
+}
+
+/* ==========================================
+   ANIMAÇÕES (KEYFRAMES)
+   ========================================== */
+@keyframes rodarPavio {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes profileGlow {
+    0%, 100% {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03), 0 0 0 0px rgba(255, 143, 171, 0.3);
+    }
+    50% {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03), 0 0 0 10px rgba(255, 143, 171, 0);
+    }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.15); }
+}
+
+/* Animação sutil de subir e descer para a seta */
+@keyframes floatingArrow {
+    0%, 100% {
+        transform: translateY(0);
+        opacity: 0.7;
+    }
+    50% {
+        transform: translateY(6px);
+        opacity: 1;
+    }
+}
