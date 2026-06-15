@@ -330,3 +330,29 @@ p {
     z-index: 3;
     pointer-events: none;
 }
+
+
+
+
+
+
+/* ==========================================
+   TRAÇO DOURADO PERSONALIZADO
+   ========================================== */
+.linha-dourada {
+    border: none;
+    height: 1px;
+    width: 75%;
+    margin: 18px auto;
+    /* Degradê que vai do rosa médio ao transparente nas pontas */
+    background: linear-gradient(90deg, transparent, rgba(219, 112, 147, 0.4), transparent);
+}
+
+
+
+
+
+
+
+
+
