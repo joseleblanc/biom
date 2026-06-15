@@ -39,3 +39,22 @@ function pauseMusic() {
     musicToggle.classList.remove('playing');
     musicIcon.className = "fas fa-music";
 }
+
+// --- NOVO CÓDIGO AQUI ---
+// Detecta quando o usuário sai ou volta para a aba/página
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+        // Se a página ficou oculta, pausa a música (sem aplicar a classe 'manually-paused')
+        if (!music.paused) {
+            pauseMusic();
+        }
+    } else {
+        // Quando o usuário volta, só dá play se ele já passou pelo overlay E se não pausou manualmente antes
+        const jaEntrou = welcomeOverlay.classList.contains('hidden');
+        const pausadoManualmente = musicToggle.classList.contains('manually-paused');
+        
+        if (jaEntrou && !pausadoManualmente && music.paused) {
+            playMusic();
+        }
+    }
+});
