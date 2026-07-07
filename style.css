@@ -9,9 +9,26 @@
 }
 
 body {
+    position: relative; /* Necessário para ancorar o fundo isolado */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+/* Camada isolada apenas para o fundo (Onde você regula o Blur) */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-color: #ffe5ec;
     
-    /* O SEU FUNDO ORIGINAL MANTIDO IDÊNTICO */
+    /* O SEU FUNDO ORIGINAL MANTIDO AQUI */
     background-image: 
         linear-gradient(135deg, rgba(255, 229, 236, 0.85), rgba(255, 194, 209, 0.85)),
         url("flor.jpg");
@@ -19,15 +36,16 @@ body {
     background-repeat: repeat;
     background-size: auto, 120px 120px;
     background-attachment: fixed;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+    z-index: -3; /* Garante que fique atrás de todo o conteúdo */
+    
+    /* ==========================================================
+       REGULE A FORÇA DO BLUR AQUI ABAIXO (Ex: 0px, 5px, 10px...)
+       ========================================================== */
+    filter: blur(0.8px); 
 }
 
 /* ==========================================
-   CONTAINER PRINCIPAL (APENAS O RISCO NA BORDA)
+   CONTAINER PRINCIPAL (EFEITO INFINITO E DELICADO)
    ========================================== */
 .container {
     position: relative;
@@ -40,21 +58,32 @@ body {
     overflow: hidden; 
 }
 
-/* O Pavio Rosa Giratório */
+/* Duas Linhas Paralelas Ultrafinas em Loop Infinito Perfeito */
 .container::before {
     content: '';
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: conic-gradient(
-        from 0deg,
-        transparent 60%,
-        #ff8fab 85%,
-        #fb6f92 100%
-    );
-    animation: rodarPavio 8s linear infinite;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+background: linear-gradient(
+    135deg,
+    transparent 0%,
+    transparent 44%,
+    rgba(255, 143, 171, 0.6) 46%,  /* Começa em 44% e vai até 46% (Grossura: 2%) */
+    transparent 48%,
+    transparent 52%,
+    rgba(251, 111, 142, 0.7) 54%,  /* Começa em 52% e vai até 54% (Grossura: 2%) */
+    transparent 56%,
+    transparent 100%
+);
+    
+    /* Define o tamanho do padrão para que ele possa se repetir perfeitamente */
+    background-size: 200% 200%;
+    
+    /* Animação linear contínua e sem fim */
+    animation: linhasInfinitas 18s linear infinite;
     z-index: -2;
 }
 
@@ -76,6 +105,19 @@ body {
 .container * {
     position: relative;
     z-index: 1;
+}
+
+/* ==========================================
+   ANIMAÇÃO DE FLUXO INFINITO PERFEITO
+   ========================================== */
+@keyframes linhasInfinitas {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        /* Move exatamente o tamanho do padrão, tornando a transição invisível */
+        background-position: 200% 200%;
+    }
 }
 
 /* ==========================================
